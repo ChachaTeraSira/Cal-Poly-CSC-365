@@ -35,9 +35,9 @@ def generate_insert_statements(csv_file, table_name, output_sql_file):
     print(f"SQL script {output_sql_file} generated successfully.")
 
 # Example usage
-csv_file = 'INN/Reservations.csv'  # Path to the CSV file
-table_name = 'INN_reservations'    # Name of the table in the database
-output_sql_file = 'INN/INN-build-Reservations.sql'  # Output SQL file
+csv_file = 'MARATHON/marathon.csv'  # Path to the CSV file
+table_name = 'MARATHON'    # Name of the table in the database
+output_sql_file = 'MARATHON/MARATHON-build-marathon.sql'  # Output SQL file
 
 # Call the function to generate the script
 generate_insert_statements(csv_file, table_name, output_sql_file)
