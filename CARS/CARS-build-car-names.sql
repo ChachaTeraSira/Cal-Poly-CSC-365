@@ -337,7 +337,7 @@ INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (336, 'mercedes-b
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (337, 'honda', 'honda civic 1500 gl');
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (338, 'renault', 'renault lecar deluxe');
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (339, 'subaru', 'subaru dl');
-INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (340, ' volkswagen', 'volkswagen rabbit');
+INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (340, 'volkswagen', 'volkswagen rabbit');
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (341, 'datsun', 'datsun 280-zx');
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (342, 'mazda', 'mazda rx-7 gs');
 INSERT INTO CARS_names (MakeId, Model, MakeDescription) VALUES (343, 'triumph', 'triumph tr7 coupe');
