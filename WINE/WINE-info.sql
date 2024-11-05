@@ -31,11 +31,6 @@ order by Revenue DESC
 
 
 -- ============ IN PROGESS ================
-show tables
-select * from appellations
-select * from grapes
-select * from wine
-
 select Price
 from wine
 where (Winery = 'Kosta Browne' and Name = 'Koplen Vineyard' and Vintage = 2008 and Grape = 'Pinot Noir') or
