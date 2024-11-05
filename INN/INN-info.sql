@@ -21,6 +21,7 @@ from reservations re, rooms rm
 where rm.RoomName = 'Frugal not apropos' and
       rm.RoomCode = re.Room and
       MONTH(CheckIn) = '07' and MONTH(Checkout) = '07'
+order by re.CheckIn, re.Checkout
 
 -- Q4.
 select DISTINCT rm.RoomName, re.CheckIn, re.Checkout
@@ -38,7 +39,14 @@ where FirstName = 'BO' and
 order by CheckIn
 
 -- Q6.
---=================================
+select rm.RoomName, re2.LastName, re2.CheckIn, DATEDIFF(re2.Checkout,re2.CheckIn) as DAYS
+from reservations re1, reservations re2, rooms rm
+where rm.decor = 'modern' and
+      rm.RoomCode = re2.Room and
+      re1.FirstName = 'FRITZ' and
+      re2.FirstName != 'FRITZ' and
+      re1.CheckIn < re2.Checkout and re2.CheckIn < re1.Checkout
+order by re2.CheckIn, rm.RoomName
 
 -- Q7
 select re.CODE, re.Room, rm.RoomName, DATE_FORMAT(CheckIn, "%e %b") as CheckIn, DATE_FORMAT(Checkout, "%e %b") as Checkout
