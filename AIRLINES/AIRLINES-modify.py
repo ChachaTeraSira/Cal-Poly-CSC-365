@@ -52,46 +52,32 @@ try:
         cursor.execute(updated_flight_number,(Continental_id,AirTran_id,Virgin_id))
         
         # 3.
-#         flip_flight_number = """
-#             UPDATE AIRLINES_flights trip1
-#             JOIN AIRLINES_flights AS trip2 ON
-#             trip1.SourceAirport = trip2.DestAirport
-#             AND trip1.DestAirport = trip2.SourceAirport
-#             AND ABS(trip1.FlightNo - trip2.FlightNo) = 1
-#             SET trip1.FlightNo = trip1.FlightNo + MOD(trip1.FlightNo, 2) * 2 - 1,
-#                 trip2.FlightNo = trip2.FlightNo + MOD(trip2.FlightNo, 2) * 2 - 1
-#             WHERE (trip1.SourceAirport != 'AKI' AND trip1.DestAirport != 'AKI') AND
-#                   (trip1.Airline != %s AND trip1.Airline != %s AND trip1.Airline != %s);
-#         """
-#         cursor.execute("""ALTER TABLE AIRLINES_flights DISABLE KEYS;""")
-#         temp_even_flight_number = """
-#             UPDATE AIRLINES_flights
-#             SET FlightNo = FlightNo + 4
-#             WHERE MOD(FlightNo, 2) = 0
-#             AND (SourceAirport = 'AKI' OR DestAirport = 'AKI')
-#             AND Airline != %s AND Airline != %s AND Airline != %s;
-#         """
-#         cursor.execute(temp_even_flight_number,(Continental_id,AirTran_id,Virgin_id))
+        temp_even_flight_number = """
+            UPDATE AIRLINES_flights
+            SET FlightNo = FlightNo + 2
+            WHERE MOD(FlightNo, 2) = 0
+            AND (SourceAirport = 'AKI')
+            AND Airline != %s AND Airline != %s AND Airline != %s;
+        """
+        cursor.execute(temp_even_flight_number,(Continental_id,AirTran_id,Virgin_id))
         
-#         odd_flight_number = """
-#             UPDATE AIRLINES_flights
-#             SET FlightNo = FlightNo - 1
-#             WHERE MOD(FlightNo, 2) = 1
-#             AND (SourceAirport = 'AKI' OR DestAirport = 'AKI')
-#             AND Airline != %s AND Airline != %s AND Airline != %s;
-#         """
-#         cursor.execute(odd_flight_number,(Continental_id,AirTran_id,Virgin_id))
+        odd_flight_number = """
+            UPDATE AIRLINES_flights
+            SET FlightNo = FlightNo - 1
+            WHERE MOD(FlightNo, 2) = 1
+            AND (DestAirport = 'AKI')
+            AND Airline != %s AND Airline != %s AND Airline != %s;
+        """
+        cursor.execute(odd_flight_number,(Continental_id,AirTran_id,Virgin_id))
         
-#         even_flight_number = """
-#             UPDATE AIRLINES_flights
-#             SET FlightNo = FlightNo - 2
-#             WHERE MOD(FlightNo, 2) = 0
-#             AND (SourceAirport = 'AKI' OR DestAirport = 'AKI')
-#             AND Airline != %s AND Airline != %s AND Airline != %s;
-#         """
-#         cursor.execute(even_flight_number,(Continental_id,AirTran_id,Virgin_id))
-        
-#         cursor.execute("""ALTER TABLE AIRLINES_flights ENABLE KEYS;""")
+        even_flight_number = """
+            UPDATE AIRLINES_flights
+            SET FlightNo = FlightNo - 1
+            WHERE MOD(FlightNo, 2) = 0
+            AND (SourceAirport = 'AKI')
+            AND Airline != %s AND Airline != %s AND Airline != %s;
+        """
+        cursor.execute(even_flight_number,(Continental_id,AirTran_id,Virgin_id))
         
         # 4.
         complete_corporate_takeover = """
@@ -109,6 +95,8 @@ try:
         table = cursor.fetchall()
         for row in table:
             print(row)
+            
+        link.commit()
             
 except Error as e:
     print("MySQL Connection error:",e)

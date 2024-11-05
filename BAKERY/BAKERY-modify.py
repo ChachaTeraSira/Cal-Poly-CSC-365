@@ -21,7 +21,6 @@ try:
     if link.is_connected():
         print("Successfully connected to MySQL server")
         
-        # DO YOU WANT US TO COMMIT THE CHANGES???  link.commit()
         cursor = link.cursor()
         # 1.
 #         THE LAB SHEET SAYS LIST OF PASTRIES, BUT WE DON'T HAVE THAT TABLE, SHOULD WE DO IT ON GOODS TABLE?

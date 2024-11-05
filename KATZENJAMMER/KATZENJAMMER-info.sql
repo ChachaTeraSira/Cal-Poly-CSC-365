@@ -55,3 +55,15 @@ where v.VocalType = 'lead' and
       v.Bandmate = b.Id
 order by s.Title ASC
 
+-- Q7.
+select DISTINCT s.Title
+from Band b, Instruments i1, Instruments i2, Instruments i3, Songs s
+where b.Firstname = 'Anne-Marit' and
+      b.Id = i1.Bandmate and
+      i1.Bandmate = i2.Bandmate and
+      i1.Bandmate = i3.Bandmate and
+      i3.Song = s.SongId and
+      i2.Song = i1.Song and
+      i3.Song = i1.Song and
+      i1.Instrument != i2.Instrument and
+      i1.Instrument != i3.Instrument

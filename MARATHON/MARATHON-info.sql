@@ -21,16 +21,17 @@ where State = 'RI' and
       Age = 27
 order by Runtime
 
--- DOESNT WORK Q4.
-select *
+-- Q4.
+select DISTINCT m1.BibNumber
 from marathon m1, marathon m2
-where m1.BibNumber = m2.BibNumber
+where m1.BibNumber = m2.BibNumber and
+      m1.Place != m2.Place
 order by m1.BibNumber
 
--- DOESNT WORK Q5.
-select DISTINCT *
+-- Q5.
+select DISTINCT m1.Sex, m1.AgeGroup, m1.FirstName, m1.LastName, m1.Age, m2.FirstName, m2.LastName, m2.Age
 from marathon m1, marathon m2
-where (m1.GroupPlace = 1 or m2.GroupPlace = 2) and 
-      m1.GroupPlace = m2.GroupPlace and
-      m1.FirstName = m2.FirstName
+where (m1.GroupPlace = 1 and m2.GroupPlace = 2) and 
+      m1.AgeGroup = m2.AgeGroup and
+      m1.Sex = m2.Sex
 order by m1.Sex, m1.AgeGroup

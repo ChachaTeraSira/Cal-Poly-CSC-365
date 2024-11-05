@@ -7,21 +7,13 @@ where decor = 'traditional' and
       Beds = 2
 order by RoomCode ASC
 
--- Q2. it is suppose to work, and it does work but the output aint matchin, also can't see
--- expected results
-select DISTINCT re.CODE, re.LastName, re.CheckIn
-from rooms rm, reservations re
-where rm.RoomName = 'Mendicant with cryptic' and
-      re.Checkout - re.CheckIn = 5
-order by CheckIn ASC
-
--- another, most prolly correct one
-select DISTINCT re.CODE, re.LastName, re.CheckIn
+-- Q2.
+select DISTINCT  re.CODE, re.LastName, re.CheckIn
 from rooms rm, reservations re
 where rm.RoomName = 'Mendicant with cryptic' and
       rm.RoomCode = re.Room and
-      re.Checkout - re.CheckIn = 5
-order by CheckIn DESC
+      DATEDIFF(re.Checkout, re.CheckIn) = 5
+order by CheckIn ASC
 
 -- Q3.
 select re.LastName, re.CheckIn, re.Checkout, (re.Adults + re.Kids) as Guest, ((Checkout - CheckIn) * re.Rate) as Cost
