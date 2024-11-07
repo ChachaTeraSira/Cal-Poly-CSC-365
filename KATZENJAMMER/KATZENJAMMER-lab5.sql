@@ -1,7 +1,28 @@
 -- Khushkaranpreet khgrewal@calpoly.edu
 -- Q1.
--- ====================IN PROGESS======================
--- b.Firstname doesn't wokr with Count/aggregated operation
+select b.Firstname, Count(*) 
+from Instruments i, Band b
+where Instrument = 'bass balalaika' and
+      b.Id = 1 and
+      b.Id = i.Bandmate
+UNION
+select b.Firstname, Count(*) 
+from Instruments i, Band b
+where Instrument = 'bass balalaika' and
+      b.Id = 2 and
+      b.Id = i.Bandmate
+UNION
+select b.Firstname, Count(*) 
+from Instruments i, Band b
+where Instrument = 'bass balalaika' and
+      b.Id = 3 and
+      b.Id = i.Bandmate
+UNION
+select b.Firstname, Count(*) 
+from Instruments i, Band b
+where Instrument = 'bass balalaika' and
+      b.Id = 4 and
+      b.Id = i.Bandmate
 
 -- Q2.
 select Count(*)

@@ -19,7 +19,12 @@ from wine
 where Appellation = 'Sonoma Valley' and
       Grape = 'Zinfandel'
 
--- Q3.========code looks perfect, but answer doesn't match
+-- Q3.
+select SUM(Cases * Price * 12) as Revenue
+from wine
+where vintage = 2009 and
+      Grape = 'Sauvignon Blanc' and
+      Score >= 89
 
 -- Q4.
 select Avg(Cases)
@@ -28,4 +33,12 @@ where w.Grape = 'Zinfandel' and
       a.Area = 'Central Coast' and
       a.Appellation = w.Appellation
 
--- Q5. ========= can't understand the question
+-- Q5.
+select count(*)
+from grapes g, wine w1, wine w2
+where w1.Appellation = 'Russian River Valley' and
+      w2.Appellation = w1.Appellation and
+      g.Grape = w2.Grape and
+      w1.Vintage = w2.Vintage and
+      w1.Score = 98 and
+      g.Color = 'Red'

@@ -23,7 +23,14 @@ where c.Name = 'france' and
       cd.Cylinders = 4 and
       cd.Year >= 1971 and cd.Year <= 1976
 
--- Q3. ===========everything looks good, but answer doesn't match
+-- Q3.
+select count(*)
+from makes mk, cardata cd1, cardata cd2
+where mk.Make = 'volvo 145e (sw)' and
+      mk.Id = cd1.Id and
+      cd1.Year = 1972 and
+      cd2.Year = 1971 and
+      cd1.Accelerate > cd2.Accelerate
 
 -- Q4.
 select count(Weight)
