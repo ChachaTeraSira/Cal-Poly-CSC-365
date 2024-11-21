@@ -14,6 +14,11 @@ from list
 group by grade
 
 -- Q3.
+select classroom, Count(DISTINCT LastName) as n_students
+from list
+where grade = 0
+group by classroom
+order by n_students DESC
 
 -- Q4.
 select classroom, MIN(LastName)

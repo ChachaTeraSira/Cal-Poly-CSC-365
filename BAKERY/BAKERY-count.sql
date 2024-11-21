@@ -26,3 +26,21 @@ where r.SaleDate >= '2007-10-15' and
 group by r.SaleDate
 order by r.SaleDate
 
+-- Q4.
+select c.FirstName, c.LastName, i.Receipt, SUM(g.Price) as Amount
+from items i, receipts r, goods g, customers c
+where i.Receipt = r.RNumber and
+      i.Item = g.GId and
+      r.Customer = c.CId
+group by i.Receipt
+having SUM(g.Price) >= 30
+order by Amount DESC
+
+-- Q5.
+select c.FirstName, c.LastName, count(r.RNumber) as Num_Large_Purchases
+from items i, receipts r, customers c
+where i.Receipt = r.RNumber and
+      r.Customer = c.CId and
+      i.Ordinal = 5
+group by r.Customer
+order by MAX(r.SaleDate), c.LastName
