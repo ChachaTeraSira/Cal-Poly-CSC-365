@@ -1,0 +1,1 @@
+zip -r <lab_name>.zip <files><example: STUDENTS/STUDENTS-lab5.sql>
