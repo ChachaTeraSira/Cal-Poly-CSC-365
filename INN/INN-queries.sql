@@ -38,28 +38,28 @@ from ReservationTotals rt join MaxReservations mr on rt.RoomCode = mr.RoomCode a
 order by rt.TotalAmount desc;
 
 -- Q4.
-WITH RevenuePerMonth AS(
-    SELECT DATE_FORMAT(CheckIn, '%M') AS Month, SUM(Rate * DATEDIFF(Checkout, CheckIn)) AS Revenue
-    FROM reservations
-    GROUP BY Month
+WITH rpm AS(
+    select DATE_FORMAT(CheckIn, '%M') AS Month, SUM(Rate * DATEDIFF(Checkout, CheckIn)) AS Revenue
+    from reservations
+    group by Month
 ),
-ReservationsPerMonth AS(
-    SELECT DATE_FORMAT(CheckIn, '%M') AS Month, COUNT(CODE) AS Reservation
-    FROM reservations
-    GROUP BY Month
+respm AS(
+    select DATE_FORMAT(CheckIn, '%M') AS Month, COUNT(CODE) AS Reservation
+    from reservations
+    group by Month
 )
-SELECT RevenuePerMonth.Month, RevenuePerMonth.Revenue, ReservationsPerMonth.Reservation
-FROM RevenuePerMonth, ReservationsPerMonth
-WHERE RevenuePerMonth.Month = ReservationsPerMonth.Month
-    AND RevenuePerMonth.Revenue = (SELECT MAX(RevenuePerMonth.Revenue) FROM RevenuePerMonth);
+select rpm.Month, rpm.Revenue, respm.Reservation
+from rpm, respm
+WHERE rpm.Month = respm.Month
+    AND rpm.Revenue = (select MAX(rpm.Revenue) from rpm);
 
 -- Q5.
-SELECT rooms.RoomName, rooms.RoomCode,
+select rooms.RoomName, rooms.RoomCode,
 CASE
     WHEN MAX(reservations.CheckIn <= '2010-08-10' AND reservations.Checkout > '2010-08-10') THEN 'Occupied'
     ELSE 'Empty'
 END AS Status
-FROM reservations, rooms
+from reservations, rooms
 WHERE reservations.Room = rooms.RoomCode
-GROUP BY rooms.RoomCode
+group by rooms.RoomCode
 ORDER BY rooms.RoomCode;

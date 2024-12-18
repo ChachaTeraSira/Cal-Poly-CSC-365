@@ -16,19 +16,19 @@ having count(l.FirstName) = (
 
 -- Q2.
 WITH NumStudents AS(
-    SELECT classroom, COUNT(*) AS count
-    FROM list
-    GROUP BY classroom
+    select classroom, COUNT(*) AS count
+    from list
+    group by classroom
 ),
 AvgNum AS(
-    SELECT list.grade, AVG(NumStudents.count) AS count
-    FROM NumStudents, list
-    WHERE NumStudents.classroom = list.classroom
-    GROUP BY list.grade
+    select list.grade, AVG(NumStudents.count) AS count
+    from NumStudents, list
+    where NumStudents.classroom = list.classroom
+    group by list.grade
 )
-SELECT AvgNum.grade, AvgNum.count
-FROM AvgNum
-WHERE AvgNum.count = (SELECT MAX(AvgNum.count) FROM AvgNum);
+select AvgNum.grade, AvgNum.count
+from AvgNum
+where AvgNum.count = (select MAX(AvgNum.count) from AvgNum);
 
 -- Q3.
 select l.grade, l.FirstName, l.LastName
@@ -41,15 +41,15 @@ order by l.grade;
 
 -- Q4.
 WITH StudentCount AS(
-    SELECT classroom, COUNT(*) AS count
-    FROM list
-    GROUP BY classroom
+    select classroom, COUNT(*) AS count
+    from list
+    group by classroom
 )
-SELECT s1.classroom, s2.classroom, s1.count
-FROM StudentCount s1, StudentCount s2
-WHERE s1.count = s2.count
-    AND s1.classroom != s2.classroom
-    AND s1.classroom < s2.classroom
+select s1.classroom, s2.classroom, s1.count
+from StudentCount s1, StudentCount s2
+where s1.count = s2.count
+    and s1.classroom != s2.classroom
+    and s1.classroom < s2.classroom
 ORDER BY s1.count ASC;
 
 -- Q5.

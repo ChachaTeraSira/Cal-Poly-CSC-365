@@ -13,7 +13,7 @@ group by Bandmate
 where b.Id = ins.Bandmate
 
 -- Q2.
-WITH instrumental_comp_songid (Song_ID) AS (
+WITH instrumental_comp_songid (Song_ID) as (
 select SongId
 from Songs
 EXCEPT
@@ -24,7 +24,7 @@ group by Song
 select s1.Title
 from Songs s1, instrumental_comp_songid s2
 where s1.SongId = s2.Song_ID
-order by s1.Title ASC
+order by s1.Title asC
 
 -- Q3.
 select s.Title
@@ -42,39 +42,39 @@ having count(distinct i.Instrument) = (
 order by s.Title;
 
 -- Q4.
-WITH PlayCount AS(
-    SELECT Instrument, Bandmate, COUNT(Song) AS count
-    FROM Instruments
-    GROUP BY Instrument, Bandmate
+WITH PlayCount as(
+    select Instrument, Bandmate, COUNT(Song) as count
+    from Instruments
+    group by Instrument, Bandmate
 ),
-MostPlayed AS(
-    SELECT Bandmate, MAX(count) AS count
-    FROM PlayCount
-    GROUP BY Bandmate
+MostPlayed as(
+    select Bandmate, MAX(count) as count
+    from PlayCount
+    group by Bandmate
 ),
-FINAL AS(
-    SELECT PlayCount.Bandmate, PlayCount.count, PlayCount.Instrument
-    FROM PlayCount, MostPlayed
-    WHERE PlayCount.Bandmate = MostPlayed.Bandmate
-        AND PlayCount.count = MostPlayed.count
+FINAL as(
+    select PlayCount.Bandmate, PlayCount.count, PlayCount.Instrument
+    from PlayCount, MostPlayed
+    where PlayCount.Bandmate = MostPlayed.Bandmate
+        and PlayCount.count = MostPlayed.count
 )
-SELECT Band.Firstname, FINAL.Instrument, FINAL.count AS num
-FROM FINAL, Band
-WHERE FINAL.Bandmate = Band.Id
+select Band.Firstname, FINAL.Instrument, FINAL.count as num
+from FINAL, Band
+where FINAL.Bandmate = Band.Id
 ORDER BY Band.Firstname, FINAL.Instrument;
 
 -- Q5.
-SELECT Instruments.Instrument
-FROM Instruments, Band
-WHERE Band.Id = Instruments.Bandmate
-    AND Band.Firstname = 'Anne-Marit'
-GROUP BY Instruments.Instrument
+select Instruments.Instrument
+from Instruments, Band
+where Band.Id = Instruments.Bandmate
+    and Band.Firstname = 'Anne-Marit'
+group by Instruments.Instrument
 EXCEPT
-SELECT Instruments.Instrument
-FROM Instruments, Band
-WHERE Band.Id = Instruments.Bandmate
-    AND Band.Firstname != 'Anne-Marit'
-GROUP BY Instruments.Instrument;
+select Instruments.Instrument
+from Instruments, Band
+where Band.Id = Instruments.Bandmate
+    and Band.Firstname != 'Anne-Marit'
+group by Instruments.Instrument;
 
 -- Q6.
 select b.firstname
